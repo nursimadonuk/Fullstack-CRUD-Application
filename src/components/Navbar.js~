@@ -1,0 +1,27 @@
+import React, { Component } from "react";
+
+export default class Navbar extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <nav class="navbar">
+        <a href="index.html" class="logo">
+          <img src="../images/logo.png" alt="savethewhales" />
+        </a>
+        <ul class="nav-links">
+          <li class="nav-item">
+            <a href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="about.html">About us</a>
+          </li>
+          <li class="nav-item">
+            <a href="donate.html">Donate</a>
+          </li>
+        </ul>
+      </nav>
+    );
+  }
+}
