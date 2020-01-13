@@ -3,10 +3,12 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import "./App.css";
 
-import Home from "./pages/Home.js";
-import Students from "./pages/Students.js";
-import Campuses from "./pages/Campuses.js";
-import NotFound from "./pages/404.js";
+import {
+  HomeView,
+  StudentsView,
+  CampusesView,
+  NotFoundView
+} from "./components/views";
 
 /** 
  * This component is just a wrapper for Router and Redux. Expects
