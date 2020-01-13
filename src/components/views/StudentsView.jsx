@@ -1,11 +1,17 @@
 import React from "react";
-import { NavbarContainer } from "../containers";
+import { NavbarContainer, StudentContainer } from "../containers";
 
 export default function StudentsView(props) {
   return (
     <div>
       <NavbarContainer />
-      Students Comp
+      Students Comp <br />
+      <br />
+      <StudentContainer />
+      <br />
+      <StudentContainer />
+      <br />
+      <StudentContainer />
     </div>
   );
 }
