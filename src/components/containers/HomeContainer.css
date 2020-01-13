@@ -14,25 +14,25 @@ div {
     transition: 0.8s;
     position: relative;
     overflow: hidden;
-  }
-  
-  .btn1{
+}
+
+.btn1{
     color: white
-  }
-  
-  .btn2{
+}
+
+.btn2{
     color: #fff;
-  }
-  
-  .btn1:hover{
+}
+
+.btn1:hover{
     color: #3498db;
-  }
-  
-  .btn2:hover{
+}
+
+.btn2:hover{
     color: #3498db;
-  }
-  
-  .btn::before{
+}
+
+.btn::before{
     content: "";
     position:absolute;
     left: 0;
@@ -41,27 +41,27 @@ div {
     background: white;
     z-index: -1;
     transition: 0.8s;
-  }
-  
-  .btn1::before {
+}
+
+.btn1::before {
     top: 0;
     border-radius: 0 0 50% 50%;
     height: 180%;
-  }
-  
-  .btn2::before{
+}
+
+.btn2::before{
     bottom: 0;
     border-radius: 50% 50% 0 0;
     height: 180%;
-  }
-  
-  .btn1:hover::before{
+}
+
+.btn1:hover::before{
     height: 180%;
-  }
-  
-  .btn2:hover::before{
+}
+
+.btn2:hover::before{
     height: 0%;
-  }
+}
 
 #description {
     font-weight: bold;
@@ -85,8 +85,8 @@ img {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-  }
-   
-  .wrapper > * {
+}
+
+.wrapper > * {
     padding: 20px;
-  }
+}
