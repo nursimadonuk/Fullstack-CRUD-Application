@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 
 import Home from "./pages/Home.js";
@@ -20,14 +20,16 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/students" component={Students} />
-        <Route exact path="/campuses" component={Campuses} />
-        <Route path="/student/:id/view" render={ShowID} />
-        <Route path="/student/:id/edit" render={ShowID} />
-        <Route path="/campus/:id/view" render={ShowID} />
-        <Route path="/campus/:id/edit" render={ShowID} />
-        <Route component={NotFound} />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/students" component={Students} />
+          <Route exact path="/campuses" component={Campuses} />
+          <Route path="/student/:id/view" render={ShowID} />
+          <Route path="/student/:id/edit" render={ShowID} />
+          <Route path="/campus/:id/view" render={ShowID} />
+          <Route path="/campus/:id/edit" render={ShowID} />
+          <Route component={NotFound} />
+        </Switch>
       </Router>
     </div>
   );
