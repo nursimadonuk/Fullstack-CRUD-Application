@@ -1,22 +1,23 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import "./CampusContainer.css";
 import NoAvatarImage from "./../../images/no_avatar.png";
 
 export default class CampusContainer extends Component {
   delete = () => {
-    console.log("Deleting");
+    console.log(this.props.campus);
   };
 
   render() {
     return (
       <div className="boxed">
         <div className="column">
-          <img alt="" src={NoAvatarImage} />
+          <img alt="" src={this.props.campus.image} />
         </div>
         <div className="column">
-          Campus Name: Lorem Ipsum <br /> Location Name: Lorem Ipsum
+          Campus Name: {this.props.campus.name} <br /> Location Name: {this.props.campus.address}
         </div>
         <div className="column">
           <Link style={{ color: "purple" }} to="/campuses">
@@ -31,3 +32,5 @@ export default class CampusContainer extends Component {
     );
   }
 }
+
+CampusContainer.propTypes = {campus: PropTypes.object}
