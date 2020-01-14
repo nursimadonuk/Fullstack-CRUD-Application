@@ -6,19 +6,18 @@ const initialState = {
 };
 
 function rootReducer(state = initialState, action) {
-  if (action.type === ADD_CAMPUS) {
-    return Object.assign({}, state, {
-      CAMPUS_LIST: state.campuses.concat(action.payload)
-    });
+  switch (action.type) {
+    case ADD_CAMPUS:
+      return Object.assign({}, state, {
+        CAMPUS_LIST: state.campuses.concat(action.payload)
+      });
+    case ADD_STUDENT:
+      return Object.assign({}, state, {
+        STUDENT_LIST: state.students.concat(action.payload)
+      });
+    default:
+      return state;
   }
-
-  if (action.type === ADD_STUDENT) {
-    return Object.assign({}, state, {
-      STUDENT_LIST: state.students.concat(action.payload)
-    });
-  }
-
-  return state;
 }
 
 export default rootReducer;
