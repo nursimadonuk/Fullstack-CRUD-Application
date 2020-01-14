@@ -5,13 +5,13 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 // Individual reducers altogether under an alias;
-import rootReducer from "../reducers/index";
+import * as reducers from "../reducers/index";
 
 // Root epic;
 // import rootEpic from "../epics";
 
 // Construct our Redux store;
-const reducer = combineReducers(rootReducer);
+const reducer = combineReducers(reducers);
 const logger = createLogger({ collapsed: true });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, logger)
