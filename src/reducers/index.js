@@ -9,11 +9,11 @@ function rootReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_CAMPUS:
       return Object.assign({}, state, {
-        CAMPUS_LIST: state.campuses.concat(action.payload)
+        CAMPUS_LIST: state.CAMPUS_LIST.concat(action.payload)
       });
     case ADD_STUDENT:
       return Object.assign({}, state, {
-        STUDENT_LIST: state.students.concat(action.payload)
+        STUDENT_LIST: state.STUDENT_LIST.concat(action.payload)
       });
     default:
       return state;
