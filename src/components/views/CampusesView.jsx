@@ -5,7 +5,6 @@ export default function CampusesView(props) {
   return (
     <div>
       <NavbarContainer />
-      Campus Comp <br />
       <br />
       <CampusContainer />
       <br />

@@ -5,7 +5,7 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 // Individual reducers altogether under an alias;
-import rootReducer from '../reducers';
+import { rootReducer } from "../reducers";
 
 // Root epic;
 // import rootEpic from "../epics";
@@ -18,5 +18,3 @@ const logger = createLogger({ collapsed: true });
 export default createStore(reducer, applyMiddleware(thunkMiddleware));
 
 // epicMiddleware.run(rootEpic);
-
-

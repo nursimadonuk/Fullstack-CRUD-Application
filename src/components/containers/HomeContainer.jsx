@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+
 import "./HomeContainer.css";
-import TempImage from "./download.jpg";
+import logo from "./../../images/logo.png";
 
 export default class HomeComponent extends Component {
   render() {
     return (
       <div className="wrapper">
-        <img alt="" src={TempImage} />
+        <Link to="/" className="logo">
+          <img src={logo} alt="yes" />
+        </Link>
         <div id="description">
           <p>
             Full Stack Crud App <br />
@@ -15,12 +18,16 @@ export default class HomeComponent extends Component {
           </p>
         </div>
         <div>
-          <button className="btn btn2" id="two">
-            <Link to="/students">View Students</Link>
-          </button>
-          <button className="btn btn1" id="one">
-            <Link to="/campuses">View Campuses</Link>
-          </button>
+          <Link to="/students">
+            <button className="btn btn2" id="two">
+              View Students
+            </button>
+          </Link>
+          <Link to="/campuses">
+            <button className="btn btn1" id="one">
+              View Campuses
+            </button>
+          </Link>
         </div>
       </div>
     );
