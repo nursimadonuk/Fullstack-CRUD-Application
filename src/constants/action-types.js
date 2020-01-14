@@ -18,6 +18,6 @@ export const DELETE_CAMPUS = "DELETE_CAMPUS";
 
 /* Changes an individual object, given its ID */
 
-export const EDIT_STUDENT = "";
+export const EDIT_STUDENT = "EDIT_STUDENT";
 
-export const EDIT_CAMPUS = "";
+export const EDIT_CAMPUS = "EDIT_CAMPUS";
