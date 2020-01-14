@@ -17,7 +17,7 @@ export default class CampusContainer extends Component {
           <img alt="" src={this.props.campus.image} />
         </div>
         <div className="column">
-          Campus Name: {this.props.campus.name} <br /> Location Name: {this.props.campus.address}
+          Campus Name: {this.props.campus.name}
         </div>
         <div className="column">
           <Link style={{ color: "purple" }} to="/campuses">
