@@ -23,7 +23,7 @@ export default class CampusContainer extends Component {
             View
           </Link>
           <br />
-          <Link style={{ color: "red" }} onlick={this.delete}>
+          <Link style={{ color: "red" }} onClick={this.delete}>
             Delete
           </Link>
         </div>

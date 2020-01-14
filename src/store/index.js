@@ -5,16 +5,18 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 // Individual reducers altogether under an alias;
-import { rootReducer } from "../reducers";
+import * as reducers from "../reducers/index";
 
 // Root epic;
 // import rootEpic from "../epics";
 
 // Construct our Redux store;
-const reducer = combineReducers(rootReducer);
+const reducer = combineReducers(reducers);
 const logger = createLogger({ collapsed: true });
-// const epicMiddleware = createEpicMiddleware();
-// const middleware = composeWithDevTools(applyMiddleware(epicMiddleware, logger));
-export default createStore(reducer, applyMiddleware(thunkMiddleware));
+const middleware = composeWithDevTools(
+  applyMiddleware(thunkMiddleware, logger)
+);
+const store = createStore(reducer, middleware);
 
-// epicMiddleware.run(rootEpic);
+// export Redux Store here so that we can pass it to the Provider wrapper;
+export default store;
