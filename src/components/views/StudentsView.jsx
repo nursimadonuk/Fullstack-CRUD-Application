@@ -15,7 +15,7 @@ export default function StudentsView(props) {
           <div className="column">
             <img src={student.image} alt="" />
           </div>
-          <div className="column">Student Name: {student.name}</div>
+          <div className="column">Student Name: {student.firstName + " " + student.lastName}</div>
           <div className="column">
             <Link
               style={{ color: "purple" }}

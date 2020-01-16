@@ -77,7 +77,8 @@ export function fetchAllStudentsThunk() {
     const studentsFromAPI = [
       {
         id: 0,
-        name: "John Doe",
+        firstName: "John",
+        lastName: "Doe",
         campus: 2,
         GPA: "3.95",
         email: "john@gmail.com",
@@ -85,7 +86,8 @@ export function fetchAllStudentsThunk() {
       },
       {
         id: 1,
-        name: "Jane Doe",
+        firstName: "Jane",
+        lastName: "Doe",
         campus: 1,
         GPA: "4.00",
         email: "jane@gmail.com",
