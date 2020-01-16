@@ -1,33 +1,25 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { fetchAllStudentsThunk } from "../../thunks";
+import { fetchAllStudentsThunk, removeStudentThunk } from "../../thunks";
 import { NavbarView, StudentsView } from "../views";
 
-import "./StudentContainer.css";
-
 class StudentContainer extends Component {
-  constructor() {
-    super();
-  }
-
   componentDidMount() {
     this.props.fetchAllStudents();
   }
 
-  delete = () => {
-    console.log(this.props.student);
+  handleRemoveStudent = id => {
+    this.props.removeAStudent(id);
   };
 
   render() {
-    console.log("Hii");
-    console.log(this.props.allStudents);
     return (
       <div>
         <NavbarView />
         <StudentsView
           allStudents={this.props.allStudents.STUDENT_LIST}
-          handleRemoveStudent={this.delete}
+          handleRemoveStudent={this.handleRemoveStudent}
         />
       </div>
     );
@@ -42,7 +34,8 @@ function mapState(state) {
 
 function mapDispatch(dispatch) {
   return {
-    fetchAllStudents: () => dispatch(fetchAllStudentsThunk())
+    fetchAllStudents: () => dispatch(fetchAllStudentsThunk()),
+    removeAStudent: id => dispatch(removeStudentThunk(id))
   };
 }
 

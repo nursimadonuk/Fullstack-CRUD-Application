@@ -65,8 +65,7 @@ export function fetchAllCampusesThunk() {
         address: "55 Lexington Ave, New York, NY 10010",
         description:
           "Baruch College is a senior college in the City University of New York, educates 15,024 undergraduates and 3,005 graduate students in a high-tech campus located in midtown Manhattan.",
-        image:
-          "https://user-content.givegab.com/uploads/group/logo/437243/28fb0d3dcca3031796e1a436e180ed50ee167d41.png"
+        image: "https://www.baruch.cuny.edu/toolkit/assets/stacked-lockup.jpg"
       }
     ];
     dispatch(fetchAllCampuses(campusesFromAPI));
@@ -97,6 +96,18 @@ export function fetchAllStudentsThunk() {
   };
 }
 
+export function removeCampusThunk(id) {
+  return function(dispatch) {
+    dispatch(removeACampus(id));
+  };
+}
+
+export function removeStudentThunk(id) {
+  return function(dispatch) {
+    dispatch(removeAStudent(id));
+  };
+}
+
 // REDUCER;
 
 const initialState = {
@@ -116,12 +127,14 @@ function rootReducer(state = initialState, action) {
       });
     case DELETE_CAMPUS:
       return Object.assign({}, state, {
-        CAMPUS_LIST: state.CAMPUS_LIST.filter(campus => campus.id !== action.id)
+        CAMPUS_LIST: state.CAMPUS_LIST.filter(
+          campus => campus.id !== action.payload
+        )
       });
     case DELETE_STUDENT:
       return Object.assign({}, state, {
         STUDENT_LIST: state.STUDENT_LIST.filter(
-          student => student.id !== action.id
+          student => student.id !== action.payload
         )
       });
     case FETCH_CAMPUSES:

@@ -1,37 +1,44 @@
 import React from "react";
-import { NavbarContainer, CampusContainer } from "../containers";
+import { Link } from "react-router-dom";
+
+import "./ListView.css";
 
 export default function CampusesView(props) {
-  let elems = [
-    {
-      id: 0,
-      name: "Hunter College",
-      address: "695 Park Ave, New York, NY 10065",
-      description: "CUNY—Hunter College is a public institution that was founded in 1870. It has a total undergraduate enrollment of 16,249, and the setting is Urban. CUNY—Hunter College's ranking in the 2020 edition of Best Colleges is Regional Universities North, #23.",
-      image: "https://pbs.twimg.com/profile_images/378800000830024561/204a2bf82862c56c42db4da287d40712_400x400.jpeg"
-    },
-    {
-      id: 1,
-      name: "City College",
-      address: "160 Convent Ave, New York, NY 10031",
-      description: "The City College of the City University of New York is a public senior college of the City University of New York (CUNY) system in New York City. It is the oldest of CUNY's 24 institutions of higher learning, and is considered its flagship college.",
-      image: "https://user-content.givegab.com/uploads/group/logo/437243/28fb0d3dcca3031796e1a436e180ed50ee167d41.png"
-    },
-    {
-      id: 2,
-      name: "Baruch College",
-      address: "55 Lexington Ave, New York, NY 10010",
-      description: "Baruch College is a senior college in the City University of New York, educates 15,024 undergraduates and 3,005 graduate students in a high-tech campus located in midtown Manhattan.",
-      image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBhUUBxIWFRUVGR4bFxcXGR4gFRogICEgISAiHx8gIS4mIh0xHxsfITMmKCksOi4vHiAzODMsNyo2LisBCgoKDg0OGxAQGzclICU4MjItLS8xKy4vLS02MisvLi8uLy8rLS01MC0tLy8vMjUtLS0tLS8tLS0tLS01LS0tLf/AABEIAMgAyAMBEQACEQEDEQH/xAAcAAEBAAMAAwEAAAAAAAAAAAAABgQFBwEDCAL/xABFEAABAwIEAwQECggFBQEAAAABAAIDBBEFBhIhBzFBEyJRYSNxgZEIMjNCUmKhsbLBFBU2U3JzdOElN3WSwhfD0fDxFv/EABoBAQADAQEBAAAAAAAAAAAAAAACAwQFAQb/xAA2EQACAQIDBQUHBAIDAQAAAAAAAQIDEQQhMQUSQWFxMlGBwfATIjSRobHRM0Ph8RRyI1KSFf/aAAwDAQACEQMRAD8A7igCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgPB5IDiGO8YMwYNjU0EtPTkxPcwnv72Ox+N1G6+ho7IoVIKak81y/Bn9pP1/ZQYHmriDjuDiooKKlLHX0Bz3BzrG2wLvEHmQstXC4KlPclN39cj1SqPRevmaWn4019BiZizHRBml2mQMJEjbc+67Y+q49a0S2NCcN6lPXS+nr1YKo+J2CgrIMQomS0bg5kjQ5rh1B3C4U4OEnGWqLk75oylE9CAIAgCAIAgCAIAgCAkc5Z+wXKbNNW7XNa4hZu/yLujR5n2ArbhMBVxGccl3vT+fWaISmlkfnhrmmqzfgck9WxrLTOY1rb7NDWEXJ5nvc9vUF7tDCxw1RQi75X+r/B5Tk5XuWCwlgQBAEAQBAEB4PJAfKfEsFufay/70/kvtMB8PDoZXqzv3CZwdw9pP4HfjcvmdpfFT9cEXUuz672cX40y01TxAkFFu4NY19urwOXmbaR6xbou/spSjhlveHQrm1ds7jw6wupwbJVNDX/KNaS4dW6nF2k+YDrexfO46rGriJSjp+EkWwVomxxvMGE4DT68YnZEDy1HvH1NG59gVVHD1artCN/t89D1yS1JVnF7Jzp9JmeB9MxP0/df7Fs/+TibXt9V/RH2iLPDsQo8TpBJh0jZGO5Oabg/38ui59SnKnLdmrMmmnmj3yyMhjLpSAALkk2AHmVFJvQ9NRiua8CwigZNX1MbY5BdhB1ax4tDblw35gLRSwlapJwjHNa8upFzSPRl3OmX8yTFmDzh72i5aWua63iA4C48xy2XtfB1qCvOOQU08ijWYkayvxrDqCtihqZAJZjpjjG73c97Dk0AG7jtt4q2FCpOLklktWRcknYy6urp6KnL6t7Y2N3LnkBo9ZKrhCU3aKuz1tLUkqnilk2nl0uqwSPoxyOHvDbH2Lctl4pq+79V+SPtIm7wLNGCZgb/AIPUMkI3LQbPA82mzredlnrYWrR/UjY9UkzjfwhY2NzLA4Dcw2J8bPdb7yu/sRv2Mlz8kU1O165lTwKrKeiyFM+se1jG1D9TnEBo7kfMlYtsQlPERUVd282Sp5Jt+skb2bivk2KbSaknxIjkLfeG7+y6zrZWJavu/VEvaRKvC8So8Womy4dI2SN3JzTt/Y+Sw1KcqcnGasyaaeaM1QPQgCAIAgPB5ID5V4n/ALf1n8z8gvs9n/DQ6GZ6s7FktmMv4QwDLhjbOWPDTJew9I+5Gx73hfa/NcLFuksdJ1b7uWnRfQnC+5lz+7ObZOxLDcl5nf8A/tKSV1S13yhIdoJ31aTzJvfXqdtaw6nrYqnPE0V7CS3flflfyt1ZCLs8z6EwrE6LF6FsuGyNkjd8VzeX9j5HkvlqlKdKW7NWZoTTV0cupsijNnEOsqca1OpopdDWkn0jmgXF+YYPLmTbxXZljv8AHwsKdPtNX6ev5KVHebPxxrgyvh2XGxU8ULKnU3smxta17W/OJ08mW235m3hce7KliKlVybbjxv5cxNRWS1J3gJjFTTZnfTgkxzMc4t6Bzdw73XHnceC1bYoxlSU+K+zPIOzNJxMzJmDEMemp8Vm7kUhaI47tiNjsbcyeveJtutGAw1GFOM4LNrV6+ump4228zf0WRJMeyH+nYvPJrZBppYmC4DY7tY0jckud0bbd1+tlnnjlSxPsYRyb95vveb+R6o5XZn8MuH+I4HjUFZj0rafciOEkdrIXNIsd7DY3tudjsFVj8dCrTlSpre73wVrHsY5ps6XxBq8Qw/KFRLhUgjkjbqDi0O2HMC/I+e64+BhCdeMZq6ZZO9sjg/C2qnq+JlPJWPc97nSFz3m7j6N+5JX0u0IqOEkor1dFUNT856zXXZ4zIGU5Ih7TRTx323OkOI+kb+wGy9weFhhaV3rxZ5KTeZ3fLuRsAwLCxFHBHIbWfJIxrnvPW5PTy5BfN18dWqz3t5ruS4Fypq2ZzDM+Qaqm4mRMyiTCJGibU2+mCziHEfV5WH1rcl2MPjoywjlXztl17vXK5VKPvWR6fhAtc3HKUPNyINza1zqO692LnSlbv8kKnaPXwlygM2Yc/wDXEj/0SGS7YWnS18jmjUXEb7NDR7TYje8tp4z/AB5LcXvNa9y/v+nlZCFzB4w5Mw/KldC7CLtjnDu4STpLNPInexDhz6g+yzZeMniIy39VbPrf1kJx3WV3wdZ5HYfVsJ7rXxuA83BwP4R7lh25Fb0H18vyz2k82unmdiXCLwgCAIAgPB5ID5Z4qi3EKr/jH4Wr7LZ3w0DNLVneOE1v+ntJb6LvxuXze0viZ+uCLaXZ9d7JD4QeDwyYRBVNHfY/siepa4OcL+pzdv4it2xKrU5U+Dz8cl66Eaq4ktwSzN+pa+pZWvIp+xdM7rpcy24HiWkjbmdPgtm1sN7WMXHtXt69d5GErM9OYOJ+ZMyV/Y4DeBkjtLGRfLPJO1389RJ+bbn15qVDZlChHeqZta30Xh+foHNsz8zcOYMtZAlqMVeZatzo+9c6WXeLgfSNibud7AOZrw+0XXxKhDKOfiHCyzNXwNbqz63yikP2K7a3w76oQ7SNBxFJOeqy/wC/f9604L4eHRfYjxZ3PAK2qwzg/HNQae0ipS9usEt7oJ3AI6D3r5ytCNTHOEtG7fYtV9zI5dw2xnEsf4p00mLyulf6S2o7D0T9mgbNHkAF2cfRhSwc4wVll90Qj2kdo4lfsHWfynfkvn8B8TDqW1OyfPHDuOSXNjGw/GMc4b6zBJb7V9VjWlRbfevuihGnwOqbQ41BLJyjlY8+prgfyV1WO/BxXFMaH2ICCNl8IahpGq/VAcH+EMP8dpiP3Th7nn/yvpdifpyXPyRRU7RUfB6/ZCb+od+CNY9t/rR6ebJ09DVfCO+TofXN/wBtXbD/AHPDzIVdV67h8HI+irR5w/dIm3f2/HyFLV+HmdnXALwgCAIAgPB5ID5T4lVUNZnqrfTODmmSwI5HSA0/aCvtMBFxw8E9bGZ5tnUOGXEHLWGZOhgxOfspItQcHMeQbvc4EFoIOx96420MBXqV5Tgrp24rutxZKE1FWZO8XOIFBmeljpcC1PYHh7n6SNRAIa1oO9tydwOi17MwE6DdSpra1tfWh5OdzzkfhpitZlqrkrWGKSaHRAx+zjZzX3cD8UEsDRfoXHla7F7SpwqwjHOzzfzXn9uYUG0RGAVk+UM3RSYjC4Ogf343CzvA8+tjcexdCtBYii4xeTWpFPM6Zn3O1Fm7h9UHDmSMayaFt5NILibu5Am1tPiuRg8FLD4mO808np4E5T3kSvA6pp6fPQFQ4DXE9rL9XGxt7gVt2vFvDO3Bo8h2iaztUx1ecKt8Lg5rp5C0jkRqNiPKy14WLjRgnrZfYj3necpRfrTg82OjOpz6WSMC/wA4hzbf7tl83iH7PHb0skpJ+GRYs6bS5nB8pYzJlXNMVRJGSYXODmHZ1iC1w35OsT7QvpMTRVei4X14/J+uRWnZ3Oo5u4kRZoypURZcppz3PTSSNaI42ddw43ceQG3Pray4+G2a6FaMqslytfN/InKpdWsc+4UzxU3EGkdO4NGtzbnxcxzQPaSB7V09oxcsNNL1ncjHJmdxPyJV5ZxV8tKwmlkddjgLiO/zHeFjyPUW3vcCvAY6NeCjJ+8tfyuv0Eo7pb8O+LGGR4OyDMzzG+IBrZbFzXtGwvYEh1tjcb877rnY7ZU3Nzoq6eq0t5etCcallZmZmni5Sui7HJjX1FRJs1wY7S0+IaRd7vAWt135GvDbJlfexHuxXP7vRLx/IlU7iD4tw/oLaCCZ2qWOmvNc3dredTi4+JdqK6ezpb/tJrRvLhkrIg8si7+D1PC7LM7A4a2z6i3qAWNAPqJaR7CubtuL9rGXC1vG7/JZSZqPhF1ETpqNgI1ASuIvuAdABI8CWn3FXbDi0pvp5/weVdUfr4OcsYfWtJGo9kQOpA1gn1bj3hNuJ2g+vkeUtWdsXz5eEAQBAEB45oDU4kMEwqjdJiLYY2N5uc1oH/3yV1N1qkt2LbZFqKzJpmccLeNWHYZWzRncSxUg0OHiNRBI9i2/4dTSdWKfc5afK5Xvx4L6G8y5juB40XfqsgSR7SRuZomZ/E0gEevksuIoVqVt/R6O90ycZRehv+QWYmRGKZty7XzllNSyYgYzZxgpxKxh8NbrN9xK6NLCV4K7moX73Yqcovhc9+EZrwCSVtPUQPonOPchqYeyDj9X5hO/Q3KjVwtdXmpb9tWnf58QpR006lT+hUv7tn+0LFvy7yyyNXBJhE2MSU7IW64mMe70bdNnlwFj490q6Sqqmql8nlqyPut2sbaGCKnZaBoaPBoAColJy1JWsaClgy3meeZ76WKV0EzoXulhYXamWvYkG435rVKVegopTaTV8m+JFbsruxtahlDhmFP9G1sUbS4sa0abAXPd5dFRFzqTWebPXZIkqbOGEzxNfSYXWua4BzXto7gg7ggjmPMLfLB1E7OrH/0V76/6lRg+JMxuhLnQTRC5aWVEZY87DfSebd7e9Ya1J0pW3k+juWRlvLQ0mNZPyRTxOmxSlp42t3c49xvuaQL+zdaaWMxcnuQk2/n9yMoQWbNZhOZMBw2O+WcKq3RkfK09JZjx4guLXOHsV9XDVp5VqsU+6UtPJEVKK0RvsFxvL+Y53iBre2Z8pFLHpnby+M1wvbcbi45LLVo16CV3k9Gnl9CacZdTewUlNTm8DGtJ5lrQPuWaU5PVkkkRbM74TiTe0gw6snabgSNpNbTpJBs6++4P2rof4NWHuupFct6xUqilnu3N5lvEKPEy90FHNTllh6aDsi6/0fEbb+xZsRTlTsnNSv3O5OLT4WKBZiYQBAEAQBAQeG0zc35smnxHvU9FKYaeI/EMrQO0kcOpBIa3mB6xddGpJ4ahGEcpTV2+XBfkqXvSbZd2XOLTBfhlE/E2zmMds1pYH/O0m1wT1Fxtfl05qaqz3Ny+Tzsebqvcms6OmxjF6fDqdxayYOlqXNNn9iyw0jye46SfC/O62YRKlTliHm1ZR6/wiE82olXRUdNQUjY6NjWMaLNa0WaB5BYpzlOW9J5k0rIx8YwmhxrD3Q4lGHxuG4P3jwcOhHJSpVZ0p70HmGk8maLIdZVM/SKLEnmSWikDA8/GfE8aonO+tp2P8PitOMhH3a0FZT4dzWTRCD4HnDP8yav+mg/FIk/hIdX5BdplasRYRvDfniP+pVH/AAXQ2h+1/pHzKqXHqzf5m/Zyp/kyfgcsuG/Wh1X3JT7LNDkrH8GgyfSNmqoGubTxBzTKwEHQLggnYrRisPVlXm1B6vgzyM4palRR1tLXQ6qKRkjeWpjg4X9YWOcJQdpKzJpp6EZBSszhnCZ9f36WgeIooz8R01gZHuHUt1BoBv47dehKbw1CMY5Smrt8uCXXUrXvS5F3YLmlposw5bpMaljk1OinhcHRzR27Ru+7bnm0i4INxutFDEypXVrp6p6EZRTN8s5I57wuxrCaLJELKyphY4Olu18jWuHpXncE35brq7RoVZ4mTjFtZcOSKac4qCTZbUOIUWIMJoJY5ADYljg4D12K5s6c4dtWLVJPRmYoHoQBAEAQBARWRJBQYrX0lRtIypfO0fSims5rh42N2m3I2C341b8KdVaWS8UVQybTLVYC0ICKxtzcJ4j0lRPtHUQvpNXzWv1CRgPm6xaPNdCinUwk6a1i1Lw0fyK3lO5arnlgQETkd4xLMWI1kG8M0kcUR6OELS1zgerS4kA+S6GM9ylSpPVJt+L8iqGbbRk4Z/mTV/00H4pFCfwkOr8j1dplasRYRvDfniP+pVH/AAXQ2h+1/pHzKqXHqzfZm/Zyp/kyfgcsuG/Wh1X3JT7LJzJeV8vVGUaR9RRUznOgjLnOhYXEloJJJG5utWKxVeNaaU2ld8WIxViroMPosMp9GHRMiZe+mNoa2562AWGdSVR3m23zJJW0JXJL24dmLEaSfaQ1Dqpl/nRzW3HjZw0k+Nluxnv0qVVaW3X1RXDJtFbWQPqaRzI3ujLgQHstqbfqLgi/rCwQkoyu1fkWNXViIzXhldgGXZ6h2K1l42EtDuy0l3JgPo+riB7V0sNVhWqxh7KOb4X048e4rkrK9ywwNtW3BYBiJJlETO0J5l+kavtusFbc9pLc0u7dCcb2zIjhhl3A6/JUMlfSU8j3Olu98THPNpXgXJF+QsultHE1oYiUYTaWXF9yK6KTgi5w7CcOwthGGQRQhxuRGxrAfXpG65lSrOpnNt9XctSSM5QPQgCAIAgCAncy5ajxmRktJK6nqor9lOwAuAPNrmnZ7Pqn8zfTh8S6ScJK8Xqn913EJQvnxMCOrz3TM0z01JM7pIyZzG+sscwm/jYq1wwbzUpLlZM8vMysDwrHjiP6RmOoa5waWsggBFOy9rkk957thueXetzUK1WjublKOXe9X5JfcRi73kzbY3hNHjmGvhxFupjxuOo8CD0IO4Koo1pUpqcdUTlFNWZOwU+dME7kDoa6JvxXSudFUgdA5wa5r7D51gTzWuUsLVzd4PlnHw4+SIWkuZ+KnDM15jGjF3xUlO747KdxfUPHVpkIAa0/VF+Y6r2NTDUc4JylwbyS8PyLSlrkVmH0VPh1EyKiYGMYA1rRyAH/ALzWGc3OTlJ5k0rZIlsQw7MlJmyWpwWOnkZLFGwiWRzXAsLj0afpLbCpQlQVOo2mm9EiDT3roo8HkxKSiBxhkbJLm4jcXMt03IBuslVQUv8Ajba55E434kjhmG5uwOrqhh0NLJHPUyTtL5XtcA+1gQGHoB1W6pVw1aMN5tNRSyS4eJXGMlcqq6CrrsvvjmDWyyQuaQCSwOc22xtfTc87exYoSjCspLRP6XJtNxtxJjBYs8YThEMDKejcIY2sDjNICdIAvbs/JbKrwlSbnvSz5Iit9IqMFkxaSkJxuOJkmrYRPc5umwsSS0G977epY6ypqX/G21zyJRvxMLMuXI8acySmkdBUw37GdgBc2/MOB2ew9Wn81Zh8S6V4tXi9U/WT5iUb9TXx1eeqZumempJz0kZM6Messcwm/jYq1wwcs1KS5WTI3mfmmy1imLYgybOEzH9k7VFTQgina4cnuLt5HDpewG/iksTTpxcKCavrJ627l3IKDbvIslhLDnuWMOzplzBWU8ENG9rC8hzpngnU9ztwI/rLqYirha9R1G5K/JcMiqCnGKRVYFNjsuv9exQx8tHZSOdfne+pot0+1Ya0aKt7Jt9Scd7ibhUkggCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgP/Z" 
-    }
-  ]
+  let title =
+    props.allCampuses.length === 0 ? "NO CAMPUSES PRESENT" : "LIST OF CAMPUSES";
 
-  let results = elems.map(element => <CampusContainer campus={element} />);
   return (
     <div>
-      <NavbarContainer />
-      <br />
-      {results}
+      <h1>{title}</h1>
+
+      {props.allCampuses.map(campus => (
+        <div className="boxed" key={campus.id}>
+          <div className="column">
+            <img src={campus.image} alt="" />
+          </div>
+          <div className="column">Student Name: {campus.name}</div>
+          <div className="column">
+            <Link
+              style={{ color: "purple" }}
+              to={"/campus/" + campus.id + "/view/"}
+            >
+              View
+            </Link>
+            <br />
+            <Link
+              style={{ color: "red" }}
+              to="/campuses"
+              onClick={e => {
+                e.stopPropagation();
+                e.nativeEvent.stopImmediatePropagation();
+                props.handleRemoveStudent(campus.id);
+              }}
+            >
+              Delete
+            </Link>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
