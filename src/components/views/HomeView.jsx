@@ -27,6 +27,10 @@ export default function HomeView(props) {
             View Campuses
           </button>
         </Link>
+        <Link to="/edit">
+          edit
+        </Link>
+
       </div>
     </div>
   );

@@ -50,3 +50,34 @@ nav {
     width: 100px;
     vertical-align: middle;
 }
+
+form {
+    font-size: larger;
+    color: white;
+    display: inline;
+    justify-content: center;
+}
+
+.btn {
+    color: white;
+    background-color: #783FA0;
+}
+
+.btn:hover {
+    color:  #783FA0;
+    background-color: white;
+}
+
+.btn {
+    background-color:#783FA0;
+    color: white;
+    border: 1px solid #783FA0;
+    padding: 8px 15px;
+    font-size: 20px;
+    font-family: montserrat;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.8s;
+    position: relative;
+    overflow: hidden;
+}
