@@ -1,10 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import "./ListView.css";
+
 export default function StudentsView(props) {
+  let title =
+    props.allStudents.length === 0 ? "NO STUDENTS PRESENT" : "LIST OF STUDENTS";
+
   return (
     <div>
-      <h1>ALLSTUDENTSVIEW IS RENDERING HERE</h1>
+      <h1>{title}</h1>
       {props.allStudents.map(student => (
         <div className="boxed">
           <div className="column">
@@ -21,7 +26,12 @@ export default function StudentsView(props) {
             <br />
             <Link
               style={{ color: "red" }}
-              onClick={() => props.handleRemoveStudent(student.id)}
+              to="/students"
+              onClick={e => {
+                e.stopPropagation();
+                e.nativeEvent.stopImmediatePropagation();
+                props.handleRemoveStudent(student.id);
+              }}
             >
               Delete
             </Link>

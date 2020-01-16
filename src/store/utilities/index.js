@@ -97,6 +97,18 @@ export function fetchAllStudentsThunk() {
   };
 }
 
+export function removeCampusThunk(id) {
+  return function(dispatch) {
+    dispatch(removeACampus(id));
+  };
+}
+
+export function removeStudentThunk(id) {
+  return function(dispatch) {
+    dispatch(removeAStudent(id));
+  };
+}
+
 // REDUCER;
 
 const initialState = {
@@ -121,7 +133,7 @@ function rootReducer(state = initialState, action) {
     case DELETE_STUDENT:
       return Object.assign({}, state, {
         STUDENT_LIST: state.STUDENT_LIST.filter(
-          student => student.id !== action.id
+          student => student.id !== action.payload
         )
       });
     case FETCH_CAMPUSES:
