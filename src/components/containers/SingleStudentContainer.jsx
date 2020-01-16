@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-import "../views/Profile.css"
+import { fetchAllStudentsThunk } from "../../thunks";
+
+import { SingleStudentView, NavbarView } from "../views/";
 
 /**
  * This class will be a smart container for the Single Student View.
@@ -10,22 +13,57 @@ import "../views/Profile.css"
  * information to the Single Student View as props. This will also
  * try to get information about the campus this student belongs to.
 */
-export default class SingleStudentContainer extends Component {
+class SingleStudentContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: props.match.params.id //this will hold the student's ID from the URL
+      //this will hold the student's ID from the URL
+      id: props.match.params.id
     };
+    console.log(this.state.id);
+  }
+
+  componentDidMount() {
+    this.props.fetchAllStudents();
   }
 
   render() {
     return (
-      <div className="profile-container">
-        <div className="profile-body">
-          <img className="profile-image" src={this.props.S}></img>
-          <div className="profile-description">{this.state.id}</div>
-        </div>
+      <div>
+        <NavbarView />
+          <SingleStudentView 
+            student={this.props.allStudents.STUDENT_LIST.filter(
+              (element, index) => {
+                console.log("comparing to " + this.state.id);
+                console.log(element);
+                return element.id == this.state.id
+              }
+            )} 
+          />
+        />
       </div>
     );
   }
 }
+
+/**
+ * Used by redux to map reducers to this component's state 
+*/
+function mapState(state) {
+  return {
+    allStudents: state.rootReducer
+  };
+}
+
+/**
+ * Used by redux to map dispatch callbacks to props. This makes the
+ * action creators available to this component with the props listed
+ * below. 
+*/
+function mapDispatch(dispatch) {
+  return {
+    fetchAllStudents: () => dispatch(fetchAllStudentsThunk())
+  };
+}
+
+export default connect(mapState, mapDispatch)(SingleStudentContainer);
