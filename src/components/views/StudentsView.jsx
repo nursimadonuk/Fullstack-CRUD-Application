@@ -11,7 +11,7 @@ export default function StudentsView(props) {
     <div>
       <h1>{title}</h1>
       {props.allStudents.map(student => (
-        <div className="boxed">
+        <div className="boxed" key={student.id}>
           <div className="column">
             <img src={student.image} alt="" />
           </div>

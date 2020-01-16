@@ -1,36 +1,43 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-import "./CampusContainer.css";
-import NoAvatarImage from "./../../images/no_avatar.png";
+import { fetchAllCampusesThunk, removeCampusThunk } from "../../thunks";
+import { NavbarView, CampusesView } from "../views";
 
-export default class CampusContainer extends Component {
-  delete = () => {
-    console.log(this.props.campus);
+class CampusContainer extends Component {
+  componentDidMount() {
+    this.props.fetchAllCampuses();
+  }
+
+  handleRemoveStudent = id => {
+    this.props.removeACampus(id);
   };
 
   render() {
     return (
-      <div className="boxed">
-        <div className="column">
-          <img alt="" src={this.props.campus.image} />
-        </div>
-        <div className="column">
-          Campus Name: {this.props.campus.name}
-        </div>
-        <div className="column">
-          <Link style={{ color: "purple" }} to="/campuses">
-            View
-          </Link>
-          <br />
-          <Link style={{ color: "red" }} onClick={this.delete}>
-            Delete
-          </Link>
-        </div>
+      <div>
+        <NavbarView />
+        <CampusesView
+          allCampuses={this.props.Store.CAMPUS_LIST}
+          allStudents={this.props.Store.STUDENT_LIST}
+          handleRemoveStudent={this.handleRemoveStudent}
+        />
       </div>
     );
   }
 }
 
-CampusContainer.propTypes = {campus: PropTypes.object}
+function mapState(state) {
+  return {
+    Store: state.rootReducer
+  };
+}
+
+function mapDispatch(dispatch) {
+  return {
+    fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
+    removeACampus: id => dispatch(removeCampusThunk(id))
+  };
+}
+
+export default connect(mapState, mapDispatch)(CampusContainer);

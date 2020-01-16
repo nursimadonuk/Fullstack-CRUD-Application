@@ -3,9 +3,13 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import store from "./../store";
-import { CampusesView, NotFoundView } from "./../components/views";
+import { NotFoundView } from "./../components/views";
 
-import { HomeContainer, StudentContainer } from "../components/containers";
+import {
+  HomeContainer,
+  CampusContainer,
+  StudentContainer
+} from "../components/containers";
 
 import "./App.css";
 
@@ -31,7 +35,7 @@ function App(props) {
           <Switch>
             <Route exact path="/" component={HomeContainer} />
             <Route exact path="/students" component={StudentContainer} />
-            <Route exact path="/campuses" component={CampusesContainer} />
+            <Route exact path="/campuses" component={CampusContainer} />
             <Route path="/student/:id/view" render={ShowID} />
             <Route path="/student/:id/edit" render={ShowID} />
             <Route path="/campus/:id/view" render={ShowID} />

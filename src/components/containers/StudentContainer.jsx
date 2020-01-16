@@ -10,13 +10,10 @@ class StudentContainer extends Component {
   }
 
   handleRemoveStudent = id => {
-    console.log(id);
     this.props.removeAStudent(id);
   };
 
   render() {
-    console.log("Hii");
-    console.log(this.props.allStudents);
     return (
       <div>
         <NavbarView />
