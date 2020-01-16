@@ -18,7 +18,7 @@ class StudentContainer extends Component {
       <div>
         <NavbarView />
         <StudentsView
-          allStudents={this.props.allStudents.STUDENT_LIST}
+          allStudents={this.props.Store.STUDENT_LIST}
           handleRemoveStudent={this.handleRemoveStudent}
         />
       </div>
@@ -28,7 +28,7 @@ class StudentContainer extends Component {
 
 function mapState(state) {
   return {
-    allStudents: state.rootReducer
+    Store: state.rootReducer
   };
 }
 

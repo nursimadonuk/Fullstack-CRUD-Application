@@ -110,6 +110,18 @@ export function removeStudentThunk(id) {
   };
 }
 
+export function addCampusThunk(id) {
+  return function(dispatch) {
+    dispatch(addACampus(id));
+  };
+}
+
+export function addStudentThunk(id) {
+  return function(dispatch) {
+    dispatch(addAStudent(id));
+  };
+}
+
 // REDUCER;
 
 const initialState = {

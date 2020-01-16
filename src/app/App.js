@@ -8,7 +8,8 @@ import { NotFoundView } from "./../components/views";
 import {
   HomeContainer,
   CampusContainer,
-  StudentContainer
+  StudentContainer,
+  SingleStudentContainer
 } from "../components/containers";
 
 import "./App.css";
@@ -36,7 +37,7 @@ function App(props) {
             <Route exact path="/" component={HomeContainer} />
             <Route exact path="/students" component={StudentContainer} />
             <Route exact path="/campuses" component={CampusContainer} />
-            <Route path="/student/:id/view" render={ShowID} />
+            <Route path="/student/:id/view" component={SingleStudentContainer} />
             <Route path="/student/:id/edit" render={ShowID} />
             <Route path="/campus/:id/view" render={ShowID} />
             <Route path="/campus/:id/edit" render={ShowID} />
