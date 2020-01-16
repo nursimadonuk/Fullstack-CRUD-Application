@@ -119,13 +119,13 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
-    case ADD_CAMPUS:
+    case FETCH_CAMPUSES:
       return Object.assign({}, state, {
-        CAMPUS_LIST: state.CAMPUS_LIST.concat(action.payload)
+        CAMPUS_LIST: action.payload
       });
-    case ADD_STUDENT:
+    case FETCH_STUDENTS:
       return Object.assign({}, state, {
-        STUDENT_LIST: state.STUDENT_LIST.concat(action.payload)
+        STUDENT_LIST: action.payload
       });
     case DELETE_CAMPUS:
       return Object.assign({}, state, {
@@ -139,13 +139,13 @@ function rootReducer(state = initialState, action) {
           student => student.id !== action.payload
         )
       });
-    case FETCH_CAMPUSES:
+    case ADD_CAMPUS:
       return Object.assign({}, state, {
-        CAMPUS_LIST: action.payload
+        CAMPUS_LIST: state.CAMPUS_LIST.concat(action.payload)
       });
-    case FETCH_STUDENTS:
+    case ADD_STUDENT:
       return Object.assign({}, state, {
-        STUDENT_LIST: action.payload
+        STUDENT_LIST: state.STUDENT_LIST.concat(action.payload)
       });
     default:
       return state;
