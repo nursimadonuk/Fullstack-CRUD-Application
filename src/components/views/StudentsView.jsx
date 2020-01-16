@@ -1,31 +1,33 @@
 import React from "react";
-import { NavbarContainer, StudentContainer } from "../containers";
+import { Link } from "react-router-dom";
 
 export default function StudentsView(props) {
-  let elems = [
-    {
-      id: 0,
-      name: "Xing Tao Shi",
-      campus: "Hunter College",
-      GPA: "3.95",
-      email: "xshi603@gmail.com",
-      image: "https://i.ya-webdesign.com/images/no-avatar-png-1.png"
-    },
-    {
-      id: 1,
-      name: "Khinshan Khan",
-      campus: "Hunter College",
-      GPA: "4.00",
-      email: "kkhan@gmail.com",
-      image: "https://i.ya-webdesign.com/images/no-avatar-png-1.png"
-    }
-  ];
-
-  let results = elems.map(element => <StudentContainer student={element} />);
   return (
     <div>
-      <NavbarContainer /> <br />
-      {results}
+      <h1>ALLSTUDENTSVIEW IS RENDERING HERE</h1>
+      {props.allStudents.map(student => (
+        <div className="boxed">
+          <div className="column">
+            <img src={student.image} alt="" />
+          </div>
+          <div className="column">Student Name: {student.name}</div>
+          <div className="column">
+            <Link
+              style={{ color: "purple" }}
+              to={"/student/" + student.id + "/view/"}
+            >
+              View
+            </Link>
+            <br />
+            <Link
+              style={{ color: "red" }}
+              onClick={() => props.handleRemoveStudent(student.id)}
+            >
+              Delete
+            </Link>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

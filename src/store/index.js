@@ -5,7 +5,7 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 // Individual reducers altogether under an alias;
-import * as reducers from "../reducers/index";
+import * as reducers from "../reducers";
 
 // Root epic;
 // import rootEpic from "../epics";

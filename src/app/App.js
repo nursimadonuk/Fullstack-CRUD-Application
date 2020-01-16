@@ -10,6 +10,8 @@ import {
   NotFoundView
 } from "./../components/views";
 
+import { StudentContainer } from "../components/containers";
+
 import "./App.css";
 
 /**
@@ -33,7 +35,7 @@ function App(props) {
         <Router>
           <Switch>
             <Route exact path="/" component={HomeView} />
-            <Route exact path="/students" component={StudentsView} />
+            <Route exact path="/students" component={StudentContainer} />
             <Route exact path="/campuses" component={CampusesView} />
             <Route path="/student/:id/view" render={ShowID} />
             <Route path="/student/:id/edit" render={ShowID} />

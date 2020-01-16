@@ -1,35 +1,49 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
+import { fetchAllStudentsThunk } from "../../thunks";
+import { NavbarView, StudentsView } from "../views";
 
 import "./StudentContainer.css";
-import NoAvatarImage from "./../../images/no_avatar.png";
 
-export default class StudentContainer extends Component {
+class StudentContainer extends Component {
+  constructor() {
+    super();
+  }
+
+  componentDidMount() {
+    this.props.fetchAllStudents();
+  }
+
   delete = () => {
     console.log(this.props.student);
   };
 
   render() {
-    let viewURL = "/student/" + this.props.student.id + "/view/";
+    console.log("Hii");
+    console.log(this.props.allStudents);
     return (
-      <div className="boxed">
-        <div className="column">
-          <img src={this.props.student.image} alt="" />
-        </div>
-        <div className="column">Student Name: {this.props.student.name}</div>
-        <div className="column">
-          <Link style={{ color: "purple" }} to={viewURL}>
-            View
-          </Link>
-          <br />
-          <Link style={{ color: "red" }} onClick={this.delete}>
-            Delete
-          </Link>
-        </div>
+      <div>
+        <NavbarView />
+        <StudentsView
+          allStudents={this.props.allStudents.STUDENT_LIST}
+          handleRemoveStudent={this.delete}
+        />
       </div>
     );
   }
 }
 
-StudentContainer.propTypes = { student: PropTypes.object };
+function mapState(state) {
+  return {
+    allStudents: state.rootReducer
+  };
+}
+
+function mapDispatch(dispatch) {
+  return {
+    fetchAllStudents: () => dispatch(fetchAllStudentsThunk())
+  };
+}
+
+export default connect(mapState, mapDispatch)(StudentContainer);
