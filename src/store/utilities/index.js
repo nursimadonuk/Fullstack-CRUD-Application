@@ -81,12 +81,12 @@ export const removeStudentThunk = id => dispatch => {
     .then(res => dispatch(removeAStudent(id)));
 };
 
-export const editCampusThunk = id => dispatch => {
-  axios.post("api/campuses/edit", id).then(res => dispatch(editACampus(id)));
+export const editCampusThunk = changedCampus => dispatch => {
+  axios.post("api/campuses/edit", changedCampus).then(res => dispatch(editACampus(changedCampus)));
 };
 
-export const editStudentThunk = id => dispatch => {
-  axios.post("api/students/edit", id).then(res => dispatch(editAStudent(id)));
+export const editStudentThunk = changedStudent => dispatch => {
+  axios.post("api/students/edit", changedStudent).then(res => dispatch(editAStudent(changedStudent)));
 };
 
 export const addCampusThunk = campus => dispatch => {
