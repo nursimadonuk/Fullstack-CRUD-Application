@@ -24,7 +24,7 @@ class SingleCampusContainer extends Component {
     this.props.fetchAllStudents();
   }
 
-  handleRemoveStudent = id => {
+  handleRemoveCampus = id => {
     this.props.removeACampus(id);
   };
 

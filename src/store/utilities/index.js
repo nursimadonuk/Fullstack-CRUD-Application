@@ -1,3 +1,5 @@
+import axios from "axios";
+
 // ACTION TYPES;
 const FETCH_STUDENTS = "FETCH_STUDENTS";
 const FETCH_CAMPUSES = "FETCH_CAMPUSES";
@@ -16,11 +18,13 @@ const EDIT_CAMPUS = "EDIT_CAMPUS";
  * @param time  the amount of time in milliseconds to wait
  * @return      a promise, which passes the time as a parameter
  */
-function promiseTimeout (time) {
-  return new Promise(function(resolve,reject){
-    setTimeout(function(){resolve(time);},time);
+function promiseTimeout(time) {
+  return new Promise(function(resolve, reject) {
+    setTimeout(function() {
+      resolve(time);
+    }, time);
   });
-};
+}
 
 // ACTION CREATORS;
 function fetchAllCampuses(campuses) {
@@ -57,103 +61,45 @@ function editAStudent(newStudentValues, id) {
 
 // THUNKS;
 // These will be called in the anonymous function of our mapDispatch of one of our React components;
-export function fetchAllCampusesThunk() {
-  return function(dispatch) {
-    const campusesFromAPI = [
-      {
-        id: 0,
-        name: "Hunter College",
-        address: "695 Park Ave, New York, NY 10065",
-        description:
-          "CUNY—Hunter College is a public institution that was founded in 1870. It has a total undergraduate enrollment of 16,249, and the setting is Urban. CUNY—Hunter College's ranking in the 2020 edition of Best Colleges is Regional Universities North, #23.",
-        image:
-          "https://pbs.twimg.com/profile_images/378800000830024561/204a2bf82862c56c42db4da287d40712_400x400.jpeg"
-      },
-      {
-        id: 1,
-        name: "City College",
-        address: "160 Convent Ave, New York, NY 10031",
-        description:
-          "The City College of the City University of New York is a public senior college of the City University of New York (CUNY) system in New York City. It is the oldest of CUNY's 24 institutions of higher learning, and is considered its flagship college.",
-        image:
-          "https://user-content.givegab.com/uploads/group/logo/437243/28fb0d3dcca3031796e1a436e180ed50ee167d41.png"
-      },
-      {
-        id: 2,
-        name: "Baruch College",
-        address: "55 Lexington Ave, New York, NY 10010",
-        description:
-          "Baruch College is a senior college in the City University of New York, educates 15,024 undergraduates and 3,005 graduate students in a high-tech campus located in midtown Manhattan.",
-        image: "https://www.baruch.cuny.edu/toolkit/assets/stacked-lockup.jpg"
-      }
-    ];
-    dispatch(fetchAllCampuses(campusesFromAPI));
-  };
-}
+export const fetchAllCampusesThunk = () => dispatch => {
+  axios.get("/api/campuses/").then(res => dispatch(fetchAllCampuses(res.data)));
+};
 
-export function fetchAllStudentsThunk() {
-  return function(dispatch) {
-    const studentsFromAPI = [
-      {
-        id: 0,
-        firstName: "John",
-        lastName: "Doe",
-        campus: 2,
-        GPA: "3.95",
-        email: "john@gmail.com",
-        image: "https://i.ya-webdesign.com/images/no-avatar-png-1.png"
-      },
-      {
-        id: 1,
-        firstName: "Jane",
-        lastName: "Doe",
-        campus: 1,
-        GPA: "4.00",
-        email: "jane@gmail.com",
-        image: "https://i.ya-webdesign.com/images/no-avatar-png-1.png"
-      }
-    ];
-    promiseTimeout(1000).then(function() {
-      dispatch(fetchAllStudents(studentsFromAPI))
-    });
-  };
-}
+export const fetchAllStudentsThunk = () => dispatch => {
+  axios.get("/api/students/").then(res => dispatch(fetchAllStudents(res.data)));
+};
 
-export function removeCampusThunk(id) {
-  return function(dispatch) {
-    dispatch(removeACampus(id));
-  };
-}
+export const removeCampusThunk = id => dispatch => {
+  axios
+    .delete("api/campuses/delete", id)
+    .then(res => dispatch(removeACampus(id)));
+};
 
-export function removeStudentThunk(id) {
-  return function(dispatch) {
-    dispatch(removeAStudent(id));
-  };
-}
+export const removeStudentThunk = id => dispatch => {
+  axios
+    .delete("api/students/delete", id)
+    .then(res => dispatch(removeAStudent(id)));
+};
 
-export function editCampusThunk(campus) {
-  return function(dispatch, getState) {
-    dispatch(editACampus(campus));
-  }
-}
+export const editCampusThunk = id => dispatch => {
+  axios.post("api/campuses/edit", id).then(res => dispatch(editACampus(id)));
+};
 
-export function editStudentThunk(student) {
-  return function(dispatch, getState) {
-    dispatch(editAStudent(student));
-  }
-}
+export const editStudentThunk = id => dispatch => {
+  axios.post("api/students/edit", id).then(res => dispatch(editAStudent(id)));
+};
 
-export function addCampusThunk(campus) {
-  return function(dispatch, getState) {
-    dispatch(addACampus(campus));
-  }
-}
+export const addCampusThunk = campus => dispatch => {
+  axios
+    .post("api/campuses/add", campus)
+    .then(res => dispatch(addACampus(campus)));
+};
 
-export function addStudentThunk(student) {
-  return function(dispatch, getState) {
-    dispatch(addAStudent(student));
-  }
-}
+export const addStudentThunk = student => dispatch => {
+  axios
+    .post("api/students/add", student)
+    .then(res => dispatch(addAStudent(student)));
+};
 
 // REDUCER;
 
@@ -195,7 +141,7 @@ function rootReducer(state = initialState, action) {
     case EDIT_CAMPUS:
       return Object.assign({}, state, {
         CAMPUS_LIST: state.CAMPUS_LIST.map(campus => {
-          if(campus.id == action.payload.id) {
+          if (campus.id == action.payload.id) {
             return action.payload;
           } else {
             return campus;
@@ -205,8 +151,8 @@ function rootReducer(state = initialState, action) {
     case EDIT_STUDENT:
       return Object.assign({}, state, {
         STUDENT_LIST: state.STUDENT_LIST.map(student => {
-          if(student.id == action.payload.id) {
-            console.log("Updating with new values: ", action.payload)
+          if (student.id == action.payload.id) {
+            console.log("Updating with new values: ", action.payload);
             return action.payload;
           } else {
             return student;
