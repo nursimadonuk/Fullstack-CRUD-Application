@@ -37,11 +37,23 @@ class StudentEditContainer extends Component {
   handleImage = e => {
     this.setState({ image: e.target.value });
   };
+  handleSubmission = e => {
+    console.log(this.state); //should dispatch edit student thunk
+  }
   render() {
     return (
       <div>
         <NavbarView />
-        <StudentEditView student={"hi"} />
+        <StudentEditView 
+            student={this.state} 
+            handleFirstName={this.handleFirstName}
+            handleLastName={this.handleLastName}
+            handleCampus={this.handleCampus}
+            handleGPA={this.handleGPA}
+            handleEmail={this.handleEmail}
+            handleImage={this.handleImage}
+            handleSubmission={this.handleSubmission}
+        />
       </div>
     );
   }
