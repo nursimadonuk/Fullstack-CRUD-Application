@@ -71,13 +71,13 @@ export const fetchAllStudentsThunk = () => dispatch => {
 
 export const removeCampusThunk = id => dispatch => {
   axios
-    .delete("/api/campuses/delete", id)
+    .delete("/api/campuses/delete", { data: { id: id } })
     .then(res => dispatch(removeACampus(id)));
 };
 
 export const removeStudentThunk = id => dispatch => {
   axios
-    .delete("/api/students/delete", id)
+    .delete("/api/students/delete", { data: { id: id } })
     .then(res => dispatch(removeAStudent(id)));
 };
 
