@@ -9,6 +9,7 @@ import {
   HomeContainer,
   CampusContainer,
   StudentContainer,
+  SingleCampusContainer,
   SingleStudentContainer
 } from "../components/containers";
 
@@ -37,9 +38,12 @@ function App(props) {
             <Route exact path="/" component={HomeContainer} />
             <Route exact path="/students" component={StudentContainer} />
             <Route exact path="/campuses" component={CampusContainer} />
-            <Route path="/student/:id/view" component={SingleStudentContainer} />
+            <Route
+              path="/student/:id/view"
+              component={SingleStudentContainer}
+            />
             <Route path="/student/:id/edit" render={ShowID} />
-            <Route path="/campus/:id/view" render={ShowID} />
+            <Route path="/campus/:id/view" component={SingleCampusContainer} />
             <Route path="/campus/:id/edit" render={ShowID} />
             <Route component={NotFoundView} />
           </Switch>

@@ -6,3 +6,4 @@ export { default as NotFoundView } from "./404View";
 export { default as NavbarView } from "./NavbarView";
 
 export { default as SingleStudentView } from "./SingleStudentView";
+export { default as SingleCampusView } from "./SingleCampusView";
