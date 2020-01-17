@@ -10,6 +10,7 @@ export default function StudentsView(props) {
   return (
     <div>
       <h1>{title}</h1>
+      <p><Link to="/students/add" style={{color: "rgb(128, 255, 255)"}}>Add</Link></p>
       {props.allStudents.map(student => (
         <div className="boxed" key={student.id}>
           <div className="column">

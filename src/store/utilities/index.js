@@ -8,8 +8,19 @@ const DELETE_CAMPUS = "DELETE_CAMPUS";
 const ADD_CAMPUS = "ADD_CAMPUS";
 const ADD_STUDENT = "ADD_STUDENT";
 
-// const EDIT_STUDENT = "EDIT_STUDENT";
-// const EDIT_CAMPUS = "EDIT_CAMPUS";
+const EDIT_STUDENT = "EDIT_STUDENT";
+const EDIT_CAMPUS = "EDIT_CAMPUS";
+
+/** This function is for mocking an API call with Promises. It should be
+ * used with hardcoded data.
+ * @param time  the amount of time in milliseconds to wait
+ * @return      a promise, which passes the time as a parameter
+ */
+function promiseTimeout (time) {
+  return new Promise(function(resolve,reject){
+    setTimeout(function(){resolve(time);},time);
+  });
+};
 
 // ACTION CREATORS;
 function fetchAllCampuses(campuses) {
@@ -34,6 +45,14 @@ function addACampus(campusToAdd) {
 
 function addAStudent(studentToAdd) {
   return { type: ADD_STUDENT, payload: studentToAdd };
+}
+
+function editACampus(newCampusValues, id) {
+  return { type: EDIT_CAMPUS, payload: newCampusValues };
+}
+
+function editAStudent(newStudentValues, id) {
+  return { type: EDIT_STUDENT, payload: newStudentValues };
 }
 
 // THUNKS;
@@ -94,7 +113,9 @@ export function fetchAllStudentsThunk() {
         image: "https://i.ya-webdesign.com/images/no-avatar-png-1.png"
       }
     ];
-    dispatch(fetchAllStudents(studentsFromAPI));
+    promiseTimeout(1000).then(function() {
+      dispatch(fetchAllStudents(studentsFromAPI))
+    });
   };
 }
 
@@ -110,16 +131,28 @@ export function removeStudentThunk(id) {
   };
 }
 
-export function addCampusThunk(id) {
-  return function(dispatch) {
-    dispatch(addACampus(id));
-  };
+export function editCampusThunk(campus) {
+  return function(dispatch, getState) {
+    dispatch(editACampus(campus));
+  }
 }
 
-export function addStudentThunk(id) {
-  return function(dispatch) {
-    dispatch(addAStudent(id));
-  };
+export function editStudentThunk(student) {
+  return function(dispatch, getState) {
+    dispatch(editAStudent(student));
+  }
+}
+
+export function addCampusThunk(campus) {
+  return function(dispatch, getState) {
+    dispatch(addACampus(campus));
+  }
+}
+
+export function addStudentThunk(student) {
+  return function(dispatch, getState) {
+    dispatch(addAStudent(student));
+  }
 }
 
 // REDUCER;
@@ -131,13 +164,13 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
-    case ADD_CAMPUS:
+    case FETCH_CAMPUSES:
       return Object.assign({}, state, {
-        CAMPUS_LIST: state.CAMPUS_LIST.concat(action.payload)
+        CAMPUS_LIST: action.payload
       });
-    case ADD_STUDENT:
+    case FETCH_STUDENTS:
       return Object.assign({}, state, {
-        STUDENT_LIST: state.STUDENT_LIST.concat(action.payload)
+        STUDENT_LIST: action.payload
       });
     case DELETE_CAMPUS:
       return Object.assign({}, state, {
@@ -151,13 +184,34 @@ function rootReducer(state = initialState, action) {
           student => student.id !== action.payload
         )
       });
-    case FETCH_CAMPUSES:
+    case ADD_CAMPUS:
       return Object.assign({}, state, {
-        CAMPUS_LIST: action.payload
+        CAMPUS_LIST: state.CAMPUS_LIST.concat(action.payload)
       });
-    case FETCH_STUDENTS:
+    case ADD_STUDENT:
       return Object.assign({}, state, {
-        STUDENT_LIST: action.payload
+        STUDENT_LIST: state.STUDENT_LIST.concat(action.payload)
+      });
+    case EDIT_CAMPUS:
+      return Object.assign({}, state, {
+        CAMPUS_LIST: state.CAMPUS_LIST.map(campus => {
+          if(campus.id == action.payload.id) {
+            return action.payload;
+          } else {
+            return campus;
+          }
+        })
+      });
+    case EDIT_STUDENT:
+      return Object.assign({}, state, {
+        STUDENT_LIST: state.STUDENT_LIST.map(student => {
+          if(student.id == action.payload.id) {
+            console.log("Updating with new values: ", action.payload)
+            return action.payload;
+          } else {
+            return student;
+          }
+        })
       });
     default:
       return state;
