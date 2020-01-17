@@ -50,12 +50,17 @@ class StudentEditContainer extends Component {
       let student = this.props.students.filter(
         student => student.id === this.state.id
       );
-      console.log(`Results: ${student.length}`);
       if(student.length != 0) {
         this.setState({
           ...student[0], 
           initialized: true
         });
+      }
+      else {
+        this.setState({
+          mode: this.modes.INVALID,
+          initialized: true
+        })
       }
     }
   }
