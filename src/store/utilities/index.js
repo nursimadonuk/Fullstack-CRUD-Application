@@ -8,8 +8,8 @@ const DELETE_CAMPUS = "DELETE_CAMPUS";
 const ADD_CAMPUS = "ADD_CAMPUS";
 const ADD_STUDENT = "ADD_STUDENT";
 
-// const EDIT_STUDENT = "EDIT_STUDENT";
-// const EDIT_CAMPUS = "EDIT_CAMPUS";
+const EDIT_STUDENT = "EDIT_STUDENT";
+const EDIT_CAMPUS = "EDIT_CAMPUS";
 
 // ACTION CREATORS;
 function fetchAllCampuses(campuses) {
@@ -34,6 +34,14 @@ function addACampus(campusToAdd) {
 
 function addAStudent(studentToAdd) {
   return { type: ADD_STUDENT, payload: studentToAdd };
+}
+
+function editACampus(newCampusValues, id) {
+  return { type: EDIT_CAMPUS, payload: newCampusValues };
+}
+
+function editAStudent(newStudentValues, id) {
+  return { type: EDIT_STUDENT, payload: newStudentValues };
 }
 
 // THUNKS;
@@ -110,6 +118,18 @@ export function removeStudentThunk(id) {
   };
 }
 
+export function editCampusThunk(campus) {
+  return function(dispatch, getState) {
+    dispatch(editACampus(student));
+  }
+}
+
+export function editStudentThunk(student) {
+  return function(dispatch, getState) {
+    dispatch(editAStudent(student));
+  }
+}
+
 // REDUCER;
 
 const initialState = {
@@ -146,6 +166,26 @@ function rootReducer(state = initialState, action) {
     case ADD_STUDENT:
       return Object.assign({}, state, {
         STUDENT_LIST: state.STUDENT_LIST.concat(action.payload)
+      });
+    case EDIT_CAMPUS:
+      return Object.assign({}, state, {
+        CAMPUS_LIST: state.CAMPUS_LIST.map(campus => {
+          if(campus.id == action.payload.id) {
+            return action.payload;
+          } else {
+            return campus;
+          }
+        })
+      });
+    case EDIT_CAMPUS:
+      return Object.assign({}, state, {
+        STUDENT_LIST: state.STUDENT_LIST.map(student => {
+          if(student.id == action.payload.id) {
+            return action.payload;
+          } else {
+            return student;
+          }
+        })
       });
     default:
       return state;
