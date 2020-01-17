@@ -1,3 +1,5 @@
+import axios from "axios";
+
 // ACTION TYPES;
 const FETCH_STUDENTS = "FETCH_STUDENTS";
 const FETCH_CAMPUSES = "FETCH_CAMPUSES";
@@ -72,6 +74,10 @@ export function fetchAllCampusesThunk() {
   };
 }
 
+// export const fetchAllCampusesThunk = () => dispatch => {
+//   axios.get("/api/campuses").then(res => dispatch(fetchAllCampuses(res.data)));
+// };
+
 export function fetchAllStudentsThunk() {
   return function(dispatch) {
     const studentsFromAPI = [
@@ -98,11 +104,19 @@ export function fetchAllStudentsThunk() {
   };
 }
 
+// export const fetchAllStudentsThunk = () => dispatch => {
+//   axios.get("/api/students").then(res => dispatch(fetchAllStudents(res.data)));
+// };
+
 export function removeCampusThunk(id) {
   return function(dispatch) {
     dispatch(removeACampus(id));
   };
 }
+
+// export const removeCampusThunk = id => dispatch => {
+//   axios.delete("api/campus/" + id).then(res => dispatch(removeACampus(id)));
+// };
 
 export function removeStudentThunk(id) {
   return function(dispatch) {
@@ -110,17 +124,31 @@ export function removeStudentThunk(id) {
   };
 }
 
-export function addCampusThunk(id) {
+// export const removeStudentThunk = id => dispatch => {
+//   axios.delete("api/student/" + id).then(res => dispatch(removeAStudent(id)));
+// };
+
+export function addCampusThunk(campus) {
   return function(dispatch) {
-    dispatch(addACampus(id));
+    dispatch(addACampus(campus));
   };
 }
+
+// export const addCampusThunk = campus => dispatch => {
+//   axios.post("api/campus", campus).then(res => dispatch(addACampus(campus)));
+// };
 
 export function addStudentThunk(id) {
   return function(dispatch) {
     dispatch(addAStudent(id));
   };
 }
+
+// export const addStudentThunk = student => dispatch => {
+//   axios
+//     .post("api/students", student)
+//     .then(res => dispatch(addAStudent(student)));
+// };
 
 // REDUCER;
 
