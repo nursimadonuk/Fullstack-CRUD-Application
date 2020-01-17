@@ -7,7 +7,7 @@ import {
   removeStudentThunk
 } from "../../thunks";
 
-import { NavbarView } from "../views";
+import { NavbarView, SingleStudentView } from "../views";
 
 import "../views/ListView.css";
 
@@ -30,6 +30,10 @@ class SingleStudentContainer extends Component {
     this.props.fetchAllCampuses();
     this.props.fetchAllStudents();
   }
+
+  handleRemoveStudent = id => {
+    this.props.removeAStudent(id);
+  };
 
   render() {
     let student = this.props.Store.STUDENT_LIST.filter(
@@ -55,20 +59,12 @@ class SingleStudentContainer extends Component {
       return (
         <div>
           <NavbarView />
-          <div className="profile-container">
-            <div className="profile-body">
-              <img alt="" className="profile-image" src={student.image}></img>
-              <br />
-              {student.firstName} {student.lastName}
-              <br />
-              {campusName}
-              <br />
-              {student.GPA}
-              <br />
-              {student.email}
-              <br />
-            </div>
-          </div>
+          <br />
+          <SingleStudentView
+            student={student}
+            handleRemoveStudent={this.handleRemoveStudent}
+            campusName={campusName}
+          />
         </div>
       );
     }
