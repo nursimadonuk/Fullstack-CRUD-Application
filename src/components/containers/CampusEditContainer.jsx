@@ -27,6 +27,7 @@ class CampusEditContainer extends Component {
     number or not. Uses built-in javascript isNaN() function. If no
     "id" was provided, it will be defined, and therefore not a number.
     In this case, we can assume that you are adding a new campus. */
+    console.log("Constructor: ", this.props.match.params.id);
     if(this.props.match.params.id == undefined) {
       this.state.mode = this.modes.NEW;
     }

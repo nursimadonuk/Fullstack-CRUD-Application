@@ -10,6 +10,7 @@ export default function CampusesView(props) {
   return (
     <div>
       <h1>{title}</h1>
+      <p><Link to="/campuses/add" style={{color: "rgb(128, 255, 255)"}}>Add Campus</Link></p>
 
       {props.allCampuses.map(campus => (
         <div className="boxed" key={campus.id}>
