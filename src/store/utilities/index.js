@@ -71,33 +71,37 @@ export const fetchAllStudentsThunk = () => dispatch => {
 
 export const removeCampusThunk = id => dispatch => {
   axios
-    .delete("api/campuses/delete", id)
+    .delete("/api/campuses/delete", id)
     .then(res => dispatch(removeACampus(id)));
 };
 
 export const removeStudentThunk = id => dispatch => {
   axios
-    .delete("api/students/delete", id)
+    .delete("/api/students/delete", id)
     .then(res => dispatch(removeAStudent(id)));
 };
 
 export const editCampusThunk = changedCampus => dispatch => {
-  axios.post("api/campuses/edit", changedCampus).then(res => dispatch(editACampus(changedCampus)));
+  axios
+    .post("/api/campuses/edit", changedCampus)
+    .then(res => dispatch(editACampus(changedCampus)));
 };
 
 export const editStudentThunk = changedStudent => dispatch => {
-  axios.post("api/students/edit", changedStudent).then(res => dispatch(editAStudent(changedStudent)));
+  axios
+    .post("/api/students/edit", changedStudent)
+    .then(res => dispatch(editAStudent(changedStudent)));
 };
 
 export const addCampusThunk = campus => dispatch => {
   axios
-    .post("api/campuses/add", campus)
+    .post("/api/campuses/add", campus)
     .then(res => dispatch(addACampus(campus)));
 };
 
 export const addStudentThunk = student => dispatch => {
   axios
-    .post("api/students/add", student)
+    .post("/api/students/add", student)
     .then(res => dispatch(addAStudent(student)));
 };
 
