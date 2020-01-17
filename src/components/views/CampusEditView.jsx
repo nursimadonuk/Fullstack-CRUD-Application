@@ -8,12 +8,12 @@ export default function CampusEditView(props) {
       <table className="form">
         <tbody>
           <tr>
-            <td>First Name:</td>
+            <td>College Name:</td>
             <td>
               <input
                 type="text"
-                onChange={props.handleFirstName}
-                value={props.student.firstName}
+                onChange={props.handleName}
+                value={props.prevValues.name}
               ></input>
             </td>
           </tr>
