@@ -101,7 +101,7 @@ export const addCampusThunk = campus => dispatch => {
 
 export const addStudentThunk = student => dispatch => {
   axios
-    .post("/api/students/add", student)
+    .put("/api/students/add", student)
     .then(res => dispatch(addAStudent(student)));
 };
 
