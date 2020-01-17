@@ -31,7 +31,7 @@ export default function StudentEditView(props) {
             <td>
               <select onChange={props.handleCampus}>
                 {props.campuses.map(campus => (
-                  <option value={campus.id}>{campus.name}</option>
+                  <option value={campus.id} selected={campus.id===props.student.campus}>{campus.name}</option>
                 ))}
               </select>
             </td>
