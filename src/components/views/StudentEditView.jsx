@@ -29,9 +29,9 @@ export default function StudentEditView(props) {
           <tr>
             <td>Campus:</td>
             <td>
-              <select onChange={props.handleCampus}>
+              <select onChange={props.handleCampus} value={props.student.campus}>
                 {props.campuses.map(campus => (
-                  <option value={campus.id} selected={campus.id===props.student.campus}>{campus.name}</option>
+                  <option value={campus.id} key={campus.id}>{campus.name}</option>
                 ))}
               </select>
             </td>
@@ -39,19 +39,19 @@ export default function StudentEditView(props) {
           <tr>
             <td>GPA:</td>
             <td>
-              <input type="number" onChange={props.handleGPA}></input>
+              <input type="number" onChange={props.handleGPA} value={props.student.GPA}></input>
             </td>
           </tr>
           <tr>
             <td>Email:</td>
             <td>
-              <input type="text" onChange={props.handleEmail}></input>
+              <input type="text" onChange={props.handleEmail} value={props.student.email}></input>
             </td>
           </tr>
           <tr>
             <td>Image:</td>
             <td>
-              <input type="text" onChange={props.handleImage}></input>
+              <input type="text" onChange={props.handleImage} value={props.student.image}></input>
             </td>
           </tr>
         </tbody>
