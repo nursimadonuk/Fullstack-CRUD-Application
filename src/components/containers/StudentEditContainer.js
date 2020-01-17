@@ -10,6 +10,7 @@ class StudentEditContainer extends Component {
   constructor(props) {
     super(props);
     console.log(props);
+    this.modes = {EDIT: "Editing Student", NEW: "Enter information for the new student", INVALID: "This student was not found"}
     this.state = {
       firstName: "",
       lastName: "",
@@ -23,17 +24,24 @@ class StudentEditContainer extends Component {
       Will be set to true if the student is found in the database 
       and the redux store is updated. Used to prevent an infinite 
       loop in componentDidUpdate */
-      initialized: false
+      initialized: false,
+      mode: ""
     };
     this.props.fetchAllCampuses();
     /* Tests whether the url parameter (not query string) "id" is a
     number or not. Uses built-in javascript isNaN() function. If no
     "id" was provided, it will be defined, and therefore not a number.
-    In this case, or if its an invalid id, we can assume that you
-    are adding a new student. */
-    if(!isNaN(this.props.match.params.id)) {
+    In this case, we can assume that you are adding a new student. */
+    if(this.props.match.params.id == undefined) {
+      this.state.mode = this.modes.NEW;
+    }
+    else if(!isNaN(this.props.match.params.id)) {
       this.state.id = parseInt(this.props.match.params.id);
       this.props.fetchAllStudents();
+      this.state.mode = this.modes.EDIT;
+    }
+    else {
+      this.state.mode = this.modes.INVALID;
     }
   }
 
@@ -86,6 +94,8 @@ class StudentEditContainer extends Component {
     return (
       <div>
         <NavbarView />
+        <h1>{this.state.mode}</h1>
+        {(this.state.mode != this.modes.INVALID) && (
         <StudentEditView 
             student={this.state} 
             campuses={this.props.campuses}
@@ -97,6 +107,7 @@ class StudentEditContainer extends Component {
             handleImage={this.handleImage}
             handleSubmission={this.handleSubmission}
         />
+        )}
       </div>
     );
   }

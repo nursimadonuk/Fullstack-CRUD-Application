@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 export default function StudentEditView(props) {
   return (
     <div>
+      <img src={props.image} style={({width: "150px", height: "150px"})} alt="preview" />
       <table className="form">
         <tbody>
           <tr>
@@ -57,7 +58,7 @@ export default function StudentEditView(props) {
         </tbody>
       </table>
       <button className="btn btn1" id="one" onClick={props.handleSubmission}>
-        Submit
+        Save
       </button>
     </div>
   );
