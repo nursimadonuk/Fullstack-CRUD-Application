@@ -120,7 +120,7 @@ export function removeStudentThunk(id) {
 
 export function editCampusThunk(campus) {
   return function(dispatch, getState) {
-    dispatch(editACampus(student));
+    dispatch(editACampus(campus));
   }
 }
 

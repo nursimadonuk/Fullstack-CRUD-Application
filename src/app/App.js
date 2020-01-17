@@ -39,7 +39,7 @@ function App(props) {
             <Route exact path="/campuses" component={CampusContainer} />
             <Route exact path="/edit" component={StudentEditContainer} />
             <Route path="/student/:id/view" render={ShowID} />
-            <Route path="/student/:id/edit" render={ShowID} />
+            <Route path="/student/:id/edit" component={StudentEditContainer} />
             <Route path="/campus/:id/view" render={ShowID} />
             <Route path="/campus/:id/edit" render={ShowID} />
         
