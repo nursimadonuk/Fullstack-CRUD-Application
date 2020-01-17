@@ -11,7 +11,8 @@ import {
   StudentContainer,
   SingleCampusContainer,
   SingleStudentContainer,
-  StudentEditContainer
+  StudentEditContainer,
+  CampusEditContainer
 } from "../components/containers";
 
 import "./App.css";
@@ -21,21 +22,12 @@ import "./App.css";
  * a "store" prop. Rendered in src/index.js
  */
 function App(props) {
-  const ShowID = props => {
-    console.log(props);
-    return (
-      <div>
-        <h1>Path: {props.location.pathname} </h1>{" "}
-        <h1>ID: {props.match.params.id}</h1>
-      </div>
-    );
-  };
-
   return (
     <div className="App">
       <Provider store={store}>
         <Router>
           <Switch>
+            <Route exact path="/campuses/add" component={CampusEditContainer} />
             <Route exact path="/" component={HomeContainer} />
             <Route exact path="/students" component={StudentContainer} />
             <Route exact path="/campuses" component={CampusContainer} />
@@ -43,7 +35,7 @@ function App(props) {
             <Route path="/student/:id/view" component={SingleStudentContainer} />
             <Route path="/student/:id/edit" component={StudentEditContainer} />
             <Route path="/campus/:id/view" component={SingleCampusContainer} />
-            <Route path="/campus/:id/edit" render={ShowID} />
+            <Route path="/campus/:id/edit" component={CampusEditContainer} />
         
             <Route component={NotFoundView} />
           </Switch>

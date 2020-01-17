@@ -8,3 +8,4 @@ export { default as NavbarView } from "./NavbarView";
 
 export { default as SingleStudentView } from "./SingleStudentView";
 export { default as SingleCampusView } from "./SingleCampusView";
+export { default as CampusEditView } from "./CampusEditView";

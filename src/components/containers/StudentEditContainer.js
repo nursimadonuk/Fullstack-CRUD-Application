@@ -4,20 +4,17 @@ import { connect } from "react-redux";
 import { fetchAllStudentsThunk, fetchAllCampusesThunk, editStudentThunk, addStudentThunk } from "../../thunks";
 import { NavbarView, StudentEditView } from "../views";
 
-import "./NavbarContainer.css";
-
 class StudentEditContainer extends Component {
   constructor(props) {
     super(props);
     console.log(props);
-    this.modes = {EDIT: "Editing Student", NEW: "Enter information for the new student", INVALID: "This student was not found"}
+    this.modes = {EDIT: "Editing Student", NEW: "Enter information for the new student", INVALID: "This student was not found"};
     this.state = {
       firstName: "",
       lastName: "",
       campus: "",
       GPA: "",
       email: "",
-      image: "",
       id: null,
       /* A boolean that indicates whether we have initialized this 
       component with values from the current student's values yet. 
@@ -47,12 +44,12 @@ class StudentEditContainer extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if(prevState.initialized == false && this.props.students.length > 0) {
-      let student = this.props.students.filter(
+      let studentById = this.props.students.filter(
         student => student.id === this.state.id
       );
-      if(student.length != 0) {
+      if(studentById.length != 0) {
         this.setState({
-          ...student[0], 
+          ...studentById[0], 
           initialized: true
         });
       }
