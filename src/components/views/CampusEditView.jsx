@@ -13,46 +13,30 @@ export default function CampusEditView(props) {
               <input
                 type="text"
                 onChange={props.handleName}
-                value={props.prevValues.name}
+                value={props.initValues.name}
               ></input>
             </td>
           </tr>
           <tr>
-            <td>Last Name:</td>
+            <td>Address:</td>
             <td>
               <input
                 type="text"
-                onChange={props.handleLastName}
-                value={props.student.lastName}
+                onChange={props.handleAddress}
+                value={props.initValues.address}
               ></input>
             </td>
           </tr>
           <tr>
-            <td>Campus:</td>
+            <td>Description:</td>
             <td>
-              <select onChange={props.handleCampus} value={props.student.campus}>
-                {props.campuses.map(campus => (
-                  <option value={campus.id} key={campus.id}>{campus.name}</option>
-                ))}
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>GPA:</td>
-            <td>
-              <input type="number" onChange={props.handleGPA} value={props.student.GPA}></input>
-            </td>
-          </tr>
-          <tr>
-            <td>Email:</td>
-            <td>
-              <input type="text" onChange={props.handleEmail} value={props.student.email}></input>
+              <textarea onChange={props.handleDescription} value={props.initValues.description} />
             </td>
           </tr>
           <tr>
             <td>Image:</td>
             <td>
-              <input type="text" onChange={props.handleImage} value={props.student.image}></input>
+              <input type="text" onChange={props.handleImage} value={props.initValues.image}></input>
             </td>
           </tr>
         </tbody>

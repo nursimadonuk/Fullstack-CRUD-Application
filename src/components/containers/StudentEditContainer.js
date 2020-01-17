@@ -8,12 +8,13 @@ class StudentEditContainer extends Component {
   constructor(props) {
     super(props);
     console.log(props);
-    this.modes = {EDIT: "Editing Campus", NEW: "Enter information for the new campus", INVALID: "This campus was not found"}
+    this.modes = {EDIT: "Editing Student", NEW: "Enter information for the new student", INVALID: "This student was not found"};
     this.state = {
-      name: "",
-      address: "",
-      description: "",
-      image: "",
+      firstName: "",
+      lastName: "",
+      campus: "",
+      GPA: "",
+      email: "",
       id: null,
       /* A boolean that indicates whether we have initialized this 
       component with values from the current student's values yet. 
@@ -23,16 +24,17 @@ class StudentEditContainer extends Component {
       initialized: false,
       mode: ""
     };
+    this.props.fetchAllCampuses();
     /* Tests whether the url parameter (not query string) "id" is a
     number or not. Uses built-in javascript isNaN() function. If no
     "id" was provided, it will be defined, and therefore not a number.
-    In this case, we can assume that you are adding a new campus. */
+    In this case, we can assume that you are adding a new student. */
     if(this.props.match.params.id == undefined) {
       this.state.mode = this.modes.NEW;
     }
     else if(!isNaN(this.props.match.params.id)) {
       this.state.id = parseInt(this.props.match.params.id);
-      this.props.fetchAllCampuses();
+      this.props.fetchAllStudents();
       this.state.mode = this.modes.EDIT;
     }
     else {
@@ -41,13 +43,13 @@ class StudentEditContainer extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if(prevState.initialized == false && this.props.campuses.length > 0) {
-      let campus = this.props.campuses.filter(
+    if(prevState.initialized == false && this.props.students.length > 0) {
+      let studentById = this.props.students.filter(
         student => student.id === this.state.id
       );
-      if(student.length != 0) {
+      if(studentById.length != 0) {
         this.setState({
-          ...student[0], 
+          ...studentById[0], 
           initialized: true
         });
       }

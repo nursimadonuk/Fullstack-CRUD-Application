@@ -11,7 +11,8 @@ import {
   StudentContainer,
   SingleCampusContainer,
   SingleStudentContainer,
-  StudentEditContainer
+  StudentEditContainer,
+  CampusEditContainer
 } from "../components/containers";
 
 import "./App.css";
@@ -43,7 +44,7 @@ function App(props) {
             <Route path="/student/:id/view" component={SingleStudentContainer} />
             <Route path="/student/:id/edit" component={StudentEditContainer} />
             <Route path="/campus/:id/view" component={SingleCampusContainer} />
-            <Route path="/campus/:id/edit" render={ShowID} />
+            <Route path="/campus/:id/edit" component={CampusEditContainer} />
         
             <Route component={NotFoundView} />
           </Switch>

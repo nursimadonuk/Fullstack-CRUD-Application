@@ -90,7 +90,7 @@ class CampusEditContainer extends Component {
         <h1>{this.state.mode}</h1>
         {(this.state.mode != this.modes.INVALID) && (
         <CampusEditView 
-            prevValues={this.state} 
+            initValues={this.state} 
             campuses={this.props.campuses}
             handleName={this.handleName}
             handleAddress={this.handleAddress}
@@ -118,4 +118,4 @@ function mapDispatch(dispatch) {
   };
 }
 
-export default connect(mapState, mapDispatch)(StudentEditContainer);
+export default connect(mapState, mapDispatch)(CampusEditContainer);
