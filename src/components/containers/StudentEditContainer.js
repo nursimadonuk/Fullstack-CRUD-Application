@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { fetchAllStudentsThunk, fetchAllCampusesThunk, editStudentThunk } from "../../thunks";
+import { fetchAllStudentsThunk, fetchAllCampusesThunk, editStudentThunk, addStudentThunk } from "../../thunks";
 import { NavbarView, StudentEditView } from "../views";
 
 import "./NavbarContainer.css";
@@ -26,22 +26,18 @@ class StudentEditContainer extends Component {
       initialized: false
     };
     this.props.fetchAllCampuses();
-    console.log(parseInt(this.props.match.params.id));
-    try {
+    /* Tests whether the url parameter (not query string) "id" is a
+    number or not. Uses built-in javascript isNaN() function. If no
+    "id" was provided, it will be defined, and therefore not a number.
+    In this case, or if its an invalid id, we can assume that you
+    are adding a new student. */
+    if(!isNaN(this.props.match.params.id)) {
       this.state.id = parseInt(this.props.match.params.id);
       this.props.fetchAllStudents();
-    } 
-    catch(error) {
-      //do nothing, because this just means no student ID was specified
     }
   }
 
-  componentDidMount() {
-  }
-
   componentDidUpdate(prevProps, prevState) {
-    console.log("Updated state:");
-    console.log(prevState);
     if(prevState.initialized == false && this.props.students.length > 0) {
       let student = this.props.students.filter(
         student => student.id === this.state.id
@@ -77,10 +73,11 @@ class StudentEditContainer extends Component {
   handleSubmission = e => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
+    console.log(this.state.id);
     if(this.state.id != null) {
       this.props.editStudent(this.state);
     } else {
-      //planned: this.props.addStudent(this.state);
+      this.props.addStudent(this.state);
     }
   }
 
@@ -116,7 +113,8 @@ function mapDispatch(dispatch) {
   return {
     fetchAllStudents: () => dispatch(fetchAllStudentsThunk()),
     fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
-    editStudent: (changes) => dispatch(editStudentThunk(changes))
+    editStudent: (changes) => dispatch(editStudentThunk(changes)),
+    addStudent: (student) => dispatch(addStudentThunk(student))
   };
 }
 

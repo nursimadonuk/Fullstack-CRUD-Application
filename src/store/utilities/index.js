@@ -11,6 +11,17 @@ const ADD_STUDENT = "ADD_STUDENT";
 const EDIT_STUDENT = "EDIT_STUDENT";
 const EDIT_CAMPUS = "EDIT_CAMPUS";
 
+/** This function is for mocking an API call with Promises. It should be
+ * used with hardcoded data.
+ * @param time  the amount of time in milliseconds to wait
+ * @return      a promise, which passes the time as a parameter
+ */
+function promiseTimeout (time) {
+  return new Promise(function(resolve,reject){
+    setTimeout(function(){resolve(time);},time);
+  });
+};
+
 // ACTION CREATORS;
 function fetchAllCampuses(campuses) {
   return { type: FETCH_CAMPUSES, payload: campuses };
@@ -102,7 +113,9 @@ export function fetchAllStudentsThunk() {
         image: "https://i.ya-webdesign.com/images/no-avatar-png-1.png"
       }
     ];
-    dispatch(fetchAllStudents(studentsFromAPI));
+    promiseTimeout(1000).then(function() {
+      dispatch(fetchAllStudents(studentsFromAPI))
+    });
   };
 }
 
@@ -127,6 +140,18 @@ export function editCampusThunk(campus) {
 export function editStudentThunk(student) {
   return function(dispatch, getState) {
     dispatch(editAStudent(student));
+  }
+}
+
+export function addCampusThunk(campus) {
+  return function(dispatch, getState) {
+    dispatch(addACampus(campus));
+  }
+}
+
+export function addStudentThunk(student) {
+  return function(dispatch, getState) {
+    dispatch(addAStudent(student));
   }
 }
 
@@ -177,10 +202,11 @@ function rootReducer(state = initialState, action) {
           }
         })
       });
-    case EDIT_CAMPUS:
+    case EDIT_STUDENT:
       return Object.assign({}, state, {
         STUDENT_LIST: state.STUDENT_LIST.map(student => {
           if(student.id == action.payload.id) {
+            console.log("Updating with new values: ", action.payload)
             return action.payload;
           } else {
             return student;
